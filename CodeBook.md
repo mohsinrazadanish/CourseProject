@@ -19,7 +19,7 @@ The R script (run_analysis.R) is provided to complete the requirements of the as
 * Uses descriptive activity names to name the activities in the data set
         I got the acitivity names from the activity_labels.txt and used them to incorporate in to data
         
-
+        
 * Appropriately labels the data set with descriptive variable names.
         I used gsub function repetitively to adjust the descriptive variable names, they are long but they looked good to me,
 I used camelCase for naming the variables. I would try to get all lower case with words separated by dots, but I didn't get there. However, from some guidelines for naming variables in R, I found out the camelCase to be okay too.
@@ -36,4 +36,8 @@ The names are of the following form:
 etc.
 
 
+Note that the activity labels the descriptive variable names were added and the total variable of our data are now 68
+
 * From the data set in step 4, the scripts creates a second, independent tidy data set with the average of each variable for each activity and each subject. There were several options, I used dplyr package's function ddply to call numcolwise to calculate means for each activity and each subject. I found this as one of the most efficient ways to compute it.
+
+We have 30 subjects and 6 activities, therefore, we get 180 observations of means for each subject and activity.
