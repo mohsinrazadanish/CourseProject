@@ -1,46 +1,37 @@
 ## Course Project Code Book
 
 
-Source of the original data: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+Data can be download from the given link in the assignment page, but it is also available in the Github repo CourseProject.
 
-Original description: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+The R script (run_analysis.R) is provided to complete the requirements of the assignment.
 
-The attached R script (run_analysis.R) performs the following to clean up the data:
 
-* Merges the training and test sets to create one data set, namely train/X_train.txt with test/X_test.txt, the result of which is a 10299x561 data frame, as in the original description ("Number of Instances: 10299" and "Number of Attributes: 561"), train/subject_train.txt with test/subject_test.txt, the result of which is a 10299x1 data frame with subject IDs, and train/y_train.txt with test/y_test.txt, the result of which is also a 10299x1 data frame with activity IDs.
+* Merges the training and the test sets to create one data set
+        train/X_train.xt and test/X_test.txt
+        train/subject_train.txt and test/subject_test.txt
 
-* Reads features.txt and extracts only the measurements on the mean and standard deviation for each measurement. The result is a 10299x66 data frame, because only 66 out of 561 attributes are measurements on the mean and standard deviation. All measurements appear to be floating point numbers in the range (-1, 1).
+* Extracts only the measurements on the mean and standard deviation for each measurement.
+        I chose only the mean and std functions from the features_info.txt
+        The variables of interst are 33 each for mean and std making it 66
 
-* Reads activity_labels.txt and applies descriptive activity names to name the activities in the data set:
+* Uses descriptive activity names to name the activities in the data set
+        I got the acitivity names from the activity_labels.txt and used them to incorporate in to data
+        
 
-        walking
-        
-        walkingupstairs
-        
-        walkingdownstairs
-        
-        sitting
-        
-        standing
-        
-        laying
+* Appropriately labels the data set with descriptive variable names.
+        I used gsub function repetitively to adjust the descriptive variable names, they are long but they looked good to me,
+I used camelCase for naming the variables. I would try to get all lower case with words separated by dots, but I didn't get there. However, from some guidelines for naming variables in R, I found out the camelCase to be okay too.
 
-* The script also appropriately labels the data set with descriptive names: all feature names (attributes) and activity names are converted to lower case, underscores and brackets () are removed. Then it merges the 10299x66 data frame containing features with 10299x1 data frames containing activity labels and subject IDs. The result is saved as merged_clean_data.txt, a 10299x68 data frame such that the first column contains subject IDs, the second column activity names, and the last 66 columns are measurements. Subject IDs are integers between 1 and 30 inclusive. The names of the attributes are similar to the following:
+The names are of the following form:
 
-        tbodyacc-mean-x 
-        
-        tbodyacc-mean-y 
-        
-        tbodyacc-mean-z 
-        
-        tbodyacc-std-x 
-        
-        tbodyacc-std-y 
-        
-        tbodyacc-std-z 
-        
-        tgravityacc-mean-x 
-        
-        tgravityacc-mean-y
+"timeDomainValuesOfBodyAccelerationMeanAlongXAxis"
+"timeDomainValuesOfBodyAccelerationMeanAlongYAxis"
+"timeDomainValuesOfBodyAccelerationMeanAlongZAxis"
+"timeDomainValuesOfBodyAccelerationStandardDeviationAlongXAxis"
+"timeDomainValuesOfBodyAccelerationStandardDeviationAlongYAxis"
+"timeDomainValuesOfBodyAccelerationStandardDeviationAlongZAxis" 
+"timeDomainValuesOfGravityAccelerationMeanAlongXAxis"
+etc.
 
-* Finally, the script creates a 2nd, independent tidy data set with the average of each measurement for each activity and each subject. The result is saved as data_set_with_the_averages.txt, a 180x68 data frame, where as before, the first column contains subject IDs, the second column contains activity names (see below), and then the averages for each of the 66 attributes are in columns 3...68. There are 30 subjects and 6 activities, thus 180 rows in this data set with averages.
+
+* From the data set in step 4, the scripts creates a second, independent tidy data set with the average of each variable for each activity and each subject. There were several options, I used dplyr package's function ddply to call numcolwise to calculate means for each activity and each subject. I found this as one of the most efficient ways to compute it.
