@@ -8,6 +8,7 @@ The R script (run_analysis.R) is provided to complete the requirements of the as
 
 * Merges the training and the test sets to create one data set
         train/X_train.xt and test/X_test.txt
+        
         train/subject_train.txt and test/subject_test.txt
 
 * Extracts only the measurements on the mean and standard deviation for each measurement.
