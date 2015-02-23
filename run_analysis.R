@@ -58,8 +58,8 @@ my_names[67]<-"Activities"
 my_names[68]<-"Subjects"
 
 names(aggregateData)<-my_names
-#write.table(result, "tidy_data_set_with_the_averages.txt")
 
+library(dplyr)
 tidyData<-ddply(aggregateData, .(Activities, Subjects), numcolwise(mean, na.rm=TRUE))
 
 write.table(tidyData, "tidy_data_set_with_the_averages.txt", row.names=FALSE)
