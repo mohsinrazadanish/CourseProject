@@ -9,5 +9,7 @@
 
 * Run the code
 
-* (Optional: At the end, I also provided a command to write an xlsx file, if you would like to see) 
+* The file requires plyr package, plz install if it's not already done.
+
+* (Optional: At the end, I also provided a command to write an xlsx file, if you would like to see, this requires xlsx package)
 
