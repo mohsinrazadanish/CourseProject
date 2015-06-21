@@ -59,7 +59,7 @@ my_names[68]<-"Subjects"
 
 names(aggregateData)<-my_names
 
-library(dplyr)
+library(plyr)
 tidyData<-ddply(aggregateData, .(Activities, Subjects), numcolwise(mean, na.rm=TRUE))
 
 write.table(tidyData, "tidy_data_set_with_the_averages.txt", row.names=FALSE)
